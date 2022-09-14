@@ -1,0 +1,219 @@
+<div class="table-responsive">
+<button
+type="button"
+class="btn btn-success"
+data-toggle="modal"
+data-target="#formModal"
+>
+Nuevo Registro
+</button>
+
+<table class="table">
+<thead>
+  <tr>
+    <th scope="col">Cliente</th>
+    <th scope="col">Película</th>
+    <th scope="col">Empleado</th>
+    <th scope="col">Fecha de salida</th>
+    <th scope="col">Fecha de devolución</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let reservas of reservasService.reservas">
+    <td>{{ reservas.nombre }}</td>
+    <td>{{ reservas.nombreP }}</td>
+    <td>{{ reservas.nombreE }}</td>
+    <td>{{ reservas.fecha_salida }}</td>
+    <td>{{ reservas.fecha_devolucion }}</td>
+    <td>
+      <a
+        data-toggle="modal"
+        data-target="#formModal2"
+        style="cursor: pointer"
+        ><i class="material-icons" (click)="updateReserva(reservas)">edit</i></a
+      >
+    </td>
+    <td>
+      <a
+        (click)="eliminarReserva(reservas.id_prestamo)"
+        style="cursor: pointer"
+        ><i class="material-icons">delete</i></a
+      >
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<div
+class="modal fade"
+id="formModal"
+tabindex="-1"
+role="dialog"
+aria-labelledby="IdmodalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="IdmodalLabel">Agregar Reserva</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #peliculasForm="ngForm">
+      <div class="mb-3">
+        <div class="mb-3">
+          <div class="input-group">      
+            <input name="code" class="form-control" type="hidden" name="id_prestamo" #id_prestamo="ngModel" [(ngModel)]="reservasService.selectedReservas.id_prestamo"/>
+          </div>
+        </div>
+        <label>Cliente</label>
+        <div class="mb-4">
+            <select class="form-select" name="id_cliente" #id_cliente="ngModel" [(ngModel)]="reservasService.selectedReservas.id_cliente">
+              <option value="" disabled>Elija un cliente</option>
+              <option
+                value="{{ clientes.id_cliente }}"
+                *ngFor="let clientes of clientes"
+              >
+                {{ clientes.nombre }}
+              </option>
+            </select>
+          </div>
+      </div>
+      <label>Película</label>
+        <div class="mb-4">
+            <select class="form-select" name="id_pelicula" #id_pelicula="ngModel" [(ngModel)]="reservasService.selectedReservas.id_pelicula">
+              <option value="" disabled>Elija una película</option>
+              <option
+                value="{{ peliculas.id_pelicula }}"
+                *ngFor="let peliculas of peliculas"
+              >
+                {{ peliculas.nombreP }}
+              </option>
+            </select>
+          </div>
+          <label>Empleado</label>
+          <div class="mb-4">
+              <select class="form-select" name="id_empleado" #id_empleado="ngModel" [(ngModel)]="reservasService.selectedReservas.id_empleado">
+                <option value="" disabled>Elija un empleado</option>
+                <option
+                  value="{{ empleados.id_empleado }}"
+                  *ngFor="let empleados of empleados"
+                >
+                  {{ empleados.nombreE }}
+                </option>
+              </select>
+            </div>
+        <label>Fecha de salida</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="fecha_salida" #fecha_salida="ngModel" [(ngModel)]="reservasService.selectedReservas.fecha_salida"/>
+        </div>
+        <label>Fecha de devolución</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="fecha_devolucion" #fecha_devolucion="ngModel" [(ngModel)]="reservasService.selectedReservas.fecha_devolucion"/>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" (click)="createReserva(peliculasForm)">Guardar</button>
+  </div>
+</div>
+</div>
+</div>
+
+
+<div
+class="modal fade"
+id="formModal2"
+tabindex="-1"
+role="dialog"
+aria-labelledby="IdmodalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="IdmodalLabel">Editar Película</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #peliculasForm="ngForm">
+      <div class="mb-3">
+        <div class="mb-3">
+          <div class="input-group">      
+            <input name="code" class="form-control" type="hidden" name="id_prestamo" #id_prestamo="ngModel" [(ngModel)]="reservasService.selectedReservas.id_prestamo"/>
+          </div>
+        </div>
+        <label>Cliente</label>
+        <div class="mb-4">
+            <select class="form-select" name="id_cliente" #id_cliente="ngModel" [(ngModel)]="reservasService.selectedReservas.id_cliente">
+              <option value="" disabled>Elija un cliente</option>
+              <option
+                value="{{ clientes.id_cliente }}"
+                *ngFor="let clientes of clientes"
+              >
+                {{ clientes.nombre }}
+              </option>
+            </select>
+          </div>
+      </div>
+      <label>Película</label>
+        <div class="mb-4">
+            <select class="form-select" name="id_pelicula" #id_pelicula="ngModel" [(ngModel)]="reservasService.selectedReservas.id_pelicula">
+              <option value="" disabled>Elija una película</option>
+              <option
+                value="{{ peliculas.id_pelicula }}"
+                *ngFor="let peliculas of peliculas"
+              >
+                {{ peliculas.nombreP }}
+              </option>
+            </select>
+          </div>
+          <label>Empleado</label>
+          <div class="mb-4">
+              <select class="form-select" name="id_empleado" #id_empleado="ngModel" [(ngModel)]="reservasService.selectedReservas.id_empleado">
+                <option value="" disabled>Elija un empleado</option>
+                <option
+                  value="{{ empleados.id_empleado }}"
+                  *ngFor="let empleados of empleados"
+                >
+                  {{ empleados.nombreE }}
+                </option>
+              </select>
+            </div>
+        <label>Fecha de salida</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="fecha_salida" #fecha_salida="ngModel" [(ngModel)]="reservasService.selectedReservas.fecha_salida"/>
+        </div>
+        <label>Fecha de devolución</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="fecha_devolucion" #fecha_devolucion="ngModel" [(ngModel)]="reservasService.selectedReservas.fecha_devolucion"/>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" (click)="createReserva(peliculasForm)">Guardar</button>
+  </div>
+</div>
+</div>
+</div>

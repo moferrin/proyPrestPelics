@@ -1,0 +1,174 @@
+<div class="table-responsive">
+<button
+type="button"
+class="btn btn-success"
+data-toggle="modal"
+data-target="#formModal"
+>
+Nuevo Registro
+</button>
+
+
+<table class="table">
+<thead>
+  <tr>
+    <th scope="col">Nombre</th>
+    <th scope="col">Apellido</th>
+    <th scope="col">Cédula</th>
+    <th scope="col">Teléfono</th>
+    <th scope="col">Dirección</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let empleados of empleadosService.empleados">
+    <td>{{ empleados.nombreE }}</td>
+    <td>{{ empleados.apellidoE }}</td>
+    <td>{{ empleados.cedulaE }}</td>
+    <td>{{ empleados.telefonoE }}</td>
+    <td>{{ empleados.direccionE }}</td>
+    <td>
+      <a
+        data-toggle="modal"
+        data-target="#formModal2"
+        style="cursor: pointer"
+        ><i class="material-icons" (click)="updateEmpleado(empleados)">edit</i></a
+      >
+    </td>
+    <td>
+      <a
+        (click)="eliminarEmpleado(empleados.id_empleado)"
+        style="cursor: pointer"
+        ><i class="material-icons">delete</i></a
+      >
+    </td>
+  </tr>
+</tbody>
+</table>
+
+
+<div
+class="modal fade"
+id="formModal"
+tabindex="-1"
+role="dialog"
+aria-labelledby="IdmodalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="IdmodalLabel">Agregar Empleados</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #empleadosForm="ngForm">
+      <div class="mb-3">
+        <div class="mb-3">
+          <div class="input-group">      
+            <input name="code" class="form-control" type="hidden" name="id_empleado" #id_empleado="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.id_empleado"/>
+          </div>
+        </div>
+        <label>Nombre</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="nombreE" #nombreE="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.nombreE"/>
+        </div>
+      </div>
+      <label>Apellido</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="apellidoE" #apellidoE="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.apellidoE"/>
+        </div>
+        <label>Cédula</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="cedulaE" #cedulaE="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.cedulaE"/>
+        </div>
+        <label>Teléfono</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="telefonoE" #telefonoE="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.telefonoE"/>
+        </div>
+        <label>Dirección</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="direccionE" #direccionE="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.direccionE"/>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" (click)="createEmpleado(empleadosForm)">Guardar</button>
+  </div>
+</div>
+</div>
+</div>
+
+
+<div
+class="modal fade"
+id="formModal2"
+tabindex="-1"
+role="dialog"
+aria-labelledby="IdmodalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="IdmodalLabel">Editar Empleado</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #empleadosForm="ngForm">
+      <div class="mb-3">
+        <div class="mb-3">
+          <div class="input-group">      
+            <input name="code" class="form-control" type="hidden" name="id_empleado" #id_empleado="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.id_empleado"/>
+          </div>
+        </div>
+        <label>Nombre</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="nombreE" #nombreE="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.nombreE"/>
+        </div>
+      </div>
+      <label>Apellido</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="apellidoE" #apellidoE="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.apellidoE"/>
+        </div>
+        <label>Cédula</label>
+        <div class="input-group">
+          <input name="code" class="form-control" required type="text" minlength="10" maxlength="10" name="cedulaE" #cedulaE="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.cedulaE"/>
+        </div>
+        
+        <label>Teléfono</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="telefonoE" #telefonoE="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.telefonoE"/>
+        </div>
+        <label>Dirección</label>
+        <div class="input-group">
+          <input name="code" class="form-control" name="direccionE" #direccionE="ngModel" [(ngModel)]="empleadosService.selectedEmpleados.direccionE"/>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" (click)="createEmpleado(empleadosForm)">Guardar</button>
+  </div>
+</div>
+</div>
+</div>
+</div>

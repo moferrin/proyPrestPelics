@@ -1,0 +1,35 @@
+<div class="table-responsive">
+    <p>Obtiene las categorias de una determinada cuidad y año
+    </p>
+    <form class="inline" [formGroup]="form">
+        <button
+        type="button"
+        class="btn btn-success"
+        data-toggle="modal"
+        data-target="#formModal"
+        (click)="buscar($event)"
+        >
+        Buscar
+        </button>
+        <input type="text" formControlName="anio" class="form-control input-field"  placeholder="Año" aria-label="default input example">
+        <input type="text" formControlName="ciudad" class="form-control input-field"  placeholder="Ciudad" aria-label="default input example">
+
+    </form>
+        
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Categoría</th>
+            <th scope="col">Direccion</th>
+            <th scope="col"># Préstamos</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reporte of reporte3">
+            <td>{{ reporte.categoria }}</td>
+            <td>{{ reporte.direccion }}</td>
+            <td>{{ reporte.prestamos }}</td>
+          </tr>
+        </tbody>
+    </table>
+    </div>

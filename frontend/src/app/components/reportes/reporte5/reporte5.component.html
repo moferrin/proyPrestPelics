@@ -1,0 +1,40 @@
+<div class="table-responsive">
+    <p>Obtiene las peliculas por año, nombre y apellido de cliente
+    </p>
+    <form class="inline" [formGroup]="form">
+        <button
+        type="button"
+        class="btn btn-success"
+        data-toggle="modal"
+        data-target="#formModal"
+        (click)="buscar($event)"
+        >
+        Buscar
+        </button>
+        <input type="text" formControlName="anio" class="form-control input-field"  placeholder="Año" aria-label="default input example">
+        <input type="text" formControlName="nombre" class="form-control input-field"  placeholder="Nombre" aria-label="default input example">
+        <input type="text" formControlName="apellido" class="form-control input-field"  placeholder="Apellido" aria-label="default input example">
+
+    </form>
+        
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Nombre Película</th>
+            <th scope="col">Fecha Salida</th>
+            <th scope="col">Fecha Devolucion</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reporte of reporte5">
+            <td>{{ reporte.nombre }}</td>
+            <td>{{ reporte.apellido }}</td>
+            <td>{{ reporte.nombreP }}</td>
+            <td>{{ reporte.fecha_salida }}</td>
+            <td>{{ reporte.fecha_devolucion }}</td>
+          </tr>
+        </tbody>
+    </table>
+    </div>
